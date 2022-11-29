@@ -19,5 +19,10 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
+  },
+  "parserOptions": {
+    "project": "['frontend/tsconfig.json', './tsconfig.app.json']",
+    "tsconfigRootDir": "__dirname",
+    "createDefaultProgram": true
   }
 }

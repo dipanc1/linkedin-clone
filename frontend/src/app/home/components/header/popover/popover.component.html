@@ -1,0 +1,45 @@
+<ion-card>
+  <ion-card-header>
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="auto">
+          <ion-avatar>
+            <ion-img
+              src="https://media-exp1.licdn.com/dms/image/C5603AQFRI9_sNI_qkA/profile-displayphoto-shrink_400_400/0/1641565674054?e=1675296000&v=beta&t=7in9SGUc-WPwPcWPfKNop8726I0NCvF8sETAfAuD6js">
+            </ion-img>
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <ion-card-title>Jatt John Wick</ion-card-title>
+          <ion-card-subtitle>Shit Ass Crack</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button expand="block" size="small" fill="outline" color="primary">
+      View Profile
+    </ion-button>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-card-subtitle color="dark">Account</ion-card-subtitle>
+    <p class="ion-padding-top">Setting & Privacy</p>
+    <p class="ion-padding-top">Help</p>
+    <p class="ion-padding-top">Language</p>
+  </ion-card-content>
+
+
+  <div class="item-divider"></div>
+
+  <ion-card-content>
+    <ion-card-subtitle color="dark">Manage</ion-card-subtitle>
+    <p class="ion-padding-top">Posts & Activites</p>
+    <p class="ion-padding-top">Job Posting Account</p>
+  </ion-card-content>
+
+  <div class="item-divider"></div>
+
+  <ion-card-content>
+    <p (click)="onSignOut()">Sign Out</p>
+  </ion-card-content>
+
+</ion-card>
