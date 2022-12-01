@@ -35,3 +35,35 @@ ion-popover ion-content {
   --color: white;
   --margin-top: 16px;
 }
+
+ion-modal {
+  --box-shadow: none;
+  --width: 552px;
+  --height:400px
+  --margin-top: -400px;
+}
+
+ion-modal ion-grid {
+  --color: white;
+  --padding-bottom: 0px;
+  --margin: 0px;
+
+  ion-textarea {
+    --padding-top: 0px;
+  }
+}
+
+
+.item-divider {
+  border-bottom: 1px solid var(--ion-color-light-tint);
+}
+
+ion-button {
+  text-transform: initial;
+}
+
+ion-button {
+  ion-text{
+    margin-left: 0px;
+  }
+}
