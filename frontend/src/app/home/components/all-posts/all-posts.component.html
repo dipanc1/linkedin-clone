@@ -1,0 +1,52 @@
+<div class="all-posts-container">
+  <ion-content>
+    <ion-list>
+      <ion-card *ngFor="let post of allLoadedPosts">
+        <ion-grid>
+          <ion-row class="ion-align-items-center ion-justify-content">
+            <ion-col class="ion-padding" size="auto">
+              <ion-avatar>
+                <ion-img
+                  src="https://media-exp1.licdn.com/dms/image/C5603AQFRI9_sNI_qkA/profile-displayphoto-shrink_400_400/0/1641565674054?e=1675296000&v=beta&t=7in9SGUc-WPwPcWPfKNop8726I0NCvF8sETAfAuD6js">
+                </ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <div class="full-name">Jatt John Wick</div>
+              <div class="role">Shit Ass Crack</div>
+              <div class="meta-data">
+                1d<ion-icon name="ellipse"></ion-icon> Edited
+                <ion-icon name="ellipse"></ion-icon>
+                <ion-icon color="dark" name="glow-outline"></ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+          <p class="post-body">{{post.body}}</p>
+          <ion-row>
+            <ion-button color="medium" fill="clear">
+              <ion-icon name="thumbs-up-outline"></ion-icon>
+              <ion-text>Like</ion-text>
+            </ion-button>
+            <ion-button color="medium" fill="clear">
+              <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+              <ion-text>Comment</ion-text>
+            </ion-button>
+            <ion-button color="medium" fill="clear">
+              <ion-icon name="arrow-redo-outline"></ion-icon>
+              <ion-text>Share</ion-text>
+            </ion-button>
+            <ion-button color="medium" fill="clear">
+              <ion-icon name="paper-plane-outline"></ion-icon>
+              <ion-text>Send</ion-text>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+  <div class="hide-scroll"></div>
+</div>

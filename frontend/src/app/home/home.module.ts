@@ -11,6 +11,8 @@ import { ProfileSummaryComponent } from './components/profile-summary/profile-su
 import { StartPostComponent } from './components/start-post/start-post.component';
 import { AdvertisingComponent } from './components/advertising/advertising.component';
 import { ModalComponent } from './components/start-post/modal/modal.component';
+import { AllPostsComponent } from './components/all-posts/all-posts.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { ModalComponent } from './components/start-post/modal/modal.component';
     StartPostComponent,
     AdvertisingComponent,
     PopoverComponent,
-    ModalComponent
+    ModalComponent,
+    AllPostsComponent,
+    TabsComponent
   ]
 })
 export class HomePageModule { }
