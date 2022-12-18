@@ -6,6 +6,7 @@ import { JwtGuard } from 'src/auth/guards/jwt.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Role } from 'src/auth/models/role.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { IsCreatorGuard } from '../guards/is-creator.guard';
 import { FeedPost } from '../models/post.interface';
 import { FeedService } from '../services/feed.service';
 
@@ -31,6 +32,7 @@ export class FeedController {
         return this.feedService.findPosts(take, skip);
     }
 
+    @UseGuards(JwtGuard, IsCreatorGuard)
     @Put(':id')
     update(
         @Param('id') id: number,
@@ -39,6 +41,7 @@ export class FeedController {
         return this.feedService.updatePost(id, feedPost)
     }
 
+    @UseGuards(JwtGuard, IsCreatorGuard)
     @Delete(':id')
     delete(
         @Param('id') id: number

@@ -12,6 +12,6 @@ export class PostService {
 
 
   getSelectedPosts(params) {
-    return this.http.get<Post[]>(environment.apiFeedUrl + params);
+    return this.http.get<Post[]>(environment.baseApiUrl + '/feed' + params);
   }
 }
