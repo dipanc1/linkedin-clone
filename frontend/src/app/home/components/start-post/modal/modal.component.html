@@ -12,15 +12,14 @@
     <ion-row class="ion-justify-content-start">
       <ion-col size="auto">
         <ion-avatar>
-          <ion-img
-            src="https://media-exp1.licdn.com/dms/image/C5603AQFRI9_sNI_qkA/profile-displayphoto-shrink_400_400/0/1641565674054?e=1675296000&v=beta&t=7in9SGUc-WPwPcWPfKNop8726I0NCvF8sETAfAuD6js">
+          <ion-img *ngIf="userFullImagePath" [src]="userFullImagePath">
           </ion-img>
         </ion-avatar>
       </ion-col>
       <ion-col>
         <div>
           <ion-text>
-            Jatt John Wick
+            {{ fullName }}
           </ion-text>
         </div>
         <ion-button size="small" shape="round" fill="outline" color="medium">
