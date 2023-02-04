@@ -1,5 +1,6 @@
 <ion-content>
   <div class="title-container">
+    <ion-text class="subtitle-container marls">Welcome to Malreen's &nbsp;</ion-text>
     <ion-text color="primary" class="linkedin-text">Linked</ion-text>
     <ion-icon class="linkedin-icon" name="logo-linkedin" color="primary"></ion-icon>
   </div>
@@ -47,7 +48,7 @@
     </ion-card>
   </form>
   <div class="toggle-text">
-    {{ submissionType === 'login' ? 'New to LinkedIn' : 'Already on LinkedIn' }}
+    {{ submissionType === 'login' ? 'New to '+ marlText +' LinkedIn' : 'Already on '+ marlText +' LinkedIn' }}
     <ion-text (click)="toggleText()" color="primary">
       {{ submissionType === 'login' ? 'Join now' : 'Sign in' }}
     </ion-text>

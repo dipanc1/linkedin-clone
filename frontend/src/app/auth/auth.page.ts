@@ -12,6 +12,8 @@ import { AuthService } from './services/auth.service';
 export class AuthPage implements OnInit {
   @ViewChild('form') form: NgForm;
 
+  marlText = 'Marleen\'s';
+
   submissionType: 'login' | 'join' = 'login';
 
   constructor(private authService: AuthService, private router: Router) { }

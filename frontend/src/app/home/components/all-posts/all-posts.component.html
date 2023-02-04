@@ -7,12 +7,12 @@
             <ion-col class="ion-padding" size="auto">
               <ion-avatar>
                 <ion-img
-                  src="https://media-exp1.licdn.com/dms/image/C5603AQFRI9_sNI_qkA/profile-displayphoto-shrink_400_400/0/1641565674054?e=1675296000&v=beta&t=7in9SGUc-WPwPcWPfKNop8726I0NCvF8sETAfAuD6js">
+                  [src]="$any(post).fullImagePath">
                 </ion-img>
               </ion-avatar>
             </ion-col>
             <ion-col>
-              <div class="full-name">Jatt John Wick</div>
+              <div class="full-name">{{ post.author.firstName }} {{ post.author.lastName }}</div>
               <div class="role">Shit Ass Crack</div>
               <div class="meta-data">
                 1d<ion-icon name="ellipse"></ion-icon> Edited

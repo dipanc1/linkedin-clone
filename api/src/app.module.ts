@@ -20,7 +20,7 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true
     }),
     FeedModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService]
