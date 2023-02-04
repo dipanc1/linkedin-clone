@@ -1,5 +1,6 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
+# change working directory
 
 name: Build and deploy Node.js app to Azure Web App - marl-linkedin
 
@@ -14,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       # Reference the major version of a release
       - uses: actions/checkout@v3
       # Reference a specific version
@@ -26,10 +28,11 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Go inside API directory
-        run: cd api
+      - name: chnage working directory
+        run: |
+          cd api
 
-      - name: npm install, build, and test
+      - name: npm install, and build
         run: |
           npm install
           npm run build --if-present
