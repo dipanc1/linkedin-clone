@@ -6,7 +6,8 @@ import {
   UseInterceptors,
   Request,
   Get,
-  Res
+  Res,
+  Param
 } from "@nestjs/common/decorators";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { join } from "path";
@@ -18,7 +19,9 @@ import {
   removeFile,
   saveImageToStorage
 } from "../helpers/image-storage";
+import { User } from "../models/user.interface";
 import { UserService } from "../services/user.service";
+import { FriendRequest } from "../models/friend-request.interface";
 
 @Controller("user")
 export class UserController {
@@ -63,5 +66,36 @@ export class UserController {
         return of(res.sendFile(imageName, { root: "./images" }));
       })
     );
+  }
+
+  @UseGuards(JwtGuard)
+  @Get("image-name")
+  findUserImageName(
+    @Request() req,
+    @Res() res
+  ): Observable<{ imageName: string }> {
+    const userId = req.user.id;
+    return this.userService.findImageNameByUserId(userId).pipe(
+      switchMap((imageName: string) => {
+        return of({ imageName });
+      })
+    );
+  }
+
+  @UseGuards(JwtGuard)
+  @Get(":userId")
+  findUserById(@Param("userId") userStringId: string): Observable<User> {
+    const userId = parseInt(userStringId);
+    return this.userService.findUserById(userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Post("friend-request/send/:receiverId")
+  sendConnection(
+    @Param("receiverId") receiverStringId: string,
+    @Request() req,
+  ): Observable<FriendRequest | { error: string }> {
+    const receiverId = parseInt(receiverStringId);
+    return this.userService.sendFriendRequest(receiverId, req.user);
   }
 }
