@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl: '/api'
+  baseApiUrl: 'https://linkedin-marl.onrender.com/api'
 };
