@@ -73,11 +73,11 @@ export class AuthService {
   }
 
   getDefaultFullImagePath(): string {
-    return 'http://localhost:3000/api/feed/image/blank-profile-picture.png';
+    return `${environment.baseApiUrl}/feed/image/blank-profile-picture.png`;
   }
 
   getFullImagePath(imageName: string): string {
-    return 'http://localhost:3000/api/feed/image/' + imageName;
+    return `${environment.baseApiUrl}/feed/image/` + imageName;
   }
 
   getUserImage() {
