@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { UpdateResult } from "typeorm";
 import { User } from "../models/user.interface";
 import { UserService } from "../services/user.service";
-import { FriendRequest } from "../models/friend-request.interface";
+import { FriendRequest, FriendRequestStatus } from "../models/friend-request.interface";
 export declare class UserController {
     private userService;
     constructor(userService: UserService);
@@ -18,4 +18,7 @@ export declare class UserController {
     sendConnection(receiverStringId: string, req: any): Observable<FriendRequest | {
         error: string;
     }>;
+    getFriendRequestStatus(receiverStringId: string, req: any): Observable<FriendRequestStatus>;
+    respondToFriendRequest(friendRequestStringId: string, statusResponse: FriendRequestStatus): Observable<FriendRequestStatus>;
+    getFriendRequestsFromRecipients(req: any): Observable<FriendRequest[]>;
 }

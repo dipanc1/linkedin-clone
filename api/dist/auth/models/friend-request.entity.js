@@ -19,13 +19,13 @@ __decorate([
     __metadata("design:type", Number)
 ], FriendRequestEntity.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, userEntity => userEntity.sentFriendRequests),
-    __metadata("design:type", user_entity_1.UserEntity)
-], FriendRequestEntity.prototype, "creator", void 0);
-__decorate([
     (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, userEntity => userEntity.receivedFriendRequests),
     __metadata("design:type", user_entity_1.UserEntity)
 ], FriendRequestEntity.prototype, "receiver", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.UserEntity, userEntity => userEntity.sentFriendRequests),
+    __metadata("design:type", user_entity_1.UserEntity)
+], FriendRequestEntity.prototype, "creator", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

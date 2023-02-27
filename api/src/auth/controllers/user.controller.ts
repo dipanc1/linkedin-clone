@@ -7,7 +7,9 @@ import {
   Request,
   Get,
   Res,
-  Param
+  Param,
+  Put,
+  Body
 } from "@nestjs/common/decorators";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { join } from "path";
@@ -21,7 +23,10 @@ import {
 } from "../helpers/image-storage";
 import { User } from "../models/user.interface";
 import { UserService } from "../services/user.service";
-import { FriendRequest } from "../models/friend-request.interface";
+import {
+  FriendRequest,
+  FriendRequestStatus
+} from "../models/friend-request.interface";
 
 @Controller("user")
 export class UserController {
@@ -93,9 +98,41 @@ export class UserController {
   @Post("friend-request/send/:receiverId")
   sendConnection(
     @Param("receiverId") receiverStringId: string,
-    @Request() req,
+    @Request() req
   ): Observable<FriendRequest | { error: string }> {
     const receiverId = parseInt(receiverStringId);
     return this.userService.sendFriendRequest(receiverId, req.user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get("friend-request/status/:receiverId")
+  getFriendRequestStatus(
+    @Param("receiverId") receiverStringId: string,
+    @Request() req
+  ): Observable<FriendRequestStatus> {
+    const receiverId = parseInt(receiverStringId);
+    return this.userService.getFriendRequestStatus(receiverId, req.user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Put("friend-request/response/:friendRequestId")
+  respondToFriendRequest(
+    @Param("friendRequestId") friendRequestStringId: string,
+    @Body()
+    statusResponse: FriendRequestStatus
+  ): Observable<FriendRequestStatus> {
+    const friendRequestId = parseInt(friendRequestStringId);
+    return this.userService.respondToFriendRequest(
+      statusResponse.status,
+      friendRequestId
+    );
+  }
+
+  @UseGuards(JwtGuard)
+  @Get("friend-request/me/received-requests")
+  getFriendRequestsFromRecipients(
+    @Request() req
+  ): Observable<FriendRequest[]> {
+    return this.userService.getFriendRequestsFromRecipients(req.user);
   }
 }

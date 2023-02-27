@@ -70,10 +70,34 @@ let UserService = class UserService {
                 let friendRequest = {
                     creator,
                     receiver,
-                    status: "pending",
+                    status: "pending"
                 };
                 return (0, rxjs_1.from)(this.friendRequestRepository.save(friendRequest));
             }));
+        }));
+    }
+    getFriendRequestStatus(receiverId, currentUser) {
+        return this.findUserById(receiverId).pipe((0, operators_1.switchMap)((receiver) => {
+            return (0, rxjs_1.from)(this.friendRequestRepository.findOne({
+                where: [{ creator: currentUser, receiver }]
+            }));
+        }), (0, operators_1.switchMap)((friendRequest) => {
+            return (0, rxjs_1.of)({ status: friendRequest.status });
+        }));
+    }
+    getFriendRequestUserById(friendRequestId) {
+        return (0, rxjs_1.from)(this.friendRequestRepository.findOne({
+            where: [{ id: friendRequestId }]
+        }));
+    }
+    respondToFriendRequest(statusResponse, friendRequestId) {
+        return this.getFriendRequestUserById(friendRequestId).pipe((0, operators_1.switchMap)((friendRequest) => {
+            return (0, rxjs_1.from)(this.friendRequestRepository.save(Object.assign(Object.assign({}, friendRequest), { status: statusResponse })));
+        }));
+    }
+    getFriendRequestsFromRecipients(currentUser) {
+        return (0, rxjs_1.from)(this.friendRequestRepository.find({
+            where: [{ receiver: currentUser }]
         }));
     }
 };

@@ -63,6 +63,17 @@ let UserController = class UserController {
         const receiverId = parseInt(receiverStringId);
         return this.userService.sendFriendRequest(receiverId, req.user);
     }
+    getFriendRequestStatus(receiverStringId, req) {
+        const receiverId = parseInt(receiverStringId);
+        return this.userService.getFriendRequestStatus(receiverId, req.user);
+    }
+    respondToFriendRequest(friendRequestStringId, statusResponse) {
+        const friendRequestId = parseInt(friendRequestStringId);
+        return this.userService.respondToFriendRequest(statusResponse.status, friendRequestId);
+    }
+    getFriendRequestsFromRecipients(req) {
+        return this.userService.getFriendRequestsFromRecipients(req.user);
+    }
 };
 __decorate([
     (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
@@ -109,6 +120,32 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", rxjs_1.Observable)
 ], UserController.prototype, "sendConnection", null);
+__decorate([
+    (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
+    (0, decorators_1.Get)("friend-request/status/:receiverId"),
+    __param(0, (0, decorators_1.Param)("receiverId")),
+    __param(1, (0, decorators_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", rxjs_1.Observable)
+], UserController.prototype, "getFriendRequestStatus", null);
+__decorate([
+    (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
+    (0, decorators_1.Put)("friend-request/response/:friendRequestId"),
+    __param(0, (0, decorators_1.Param)("friendRequestId")),
+    __param(1, (0, decorators_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", rxjs_1.Observable)
+], UserController.prototype, "respondToFriendRequest", null);
+__decorate([
+    (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
+    (0, decorators_1.Get)("friend-request/me/received-requests"),
+    __param(0, (0, decorators_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", rxjs_1.Observable)
+], UserController.prototype, "getFriendRequestsFromRecipients", null);
 UserController = __decorate([
     (0, common_1.Controller)("user"),
     __metadata("design:paramtypes", [user_service_1.UserService])
