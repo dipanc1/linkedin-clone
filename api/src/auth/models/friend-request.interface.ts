@@ -1,6 +1,11 @@
 import { User } from "./user.interface";
 
-export type FriendRequest_Status = "pending" | "accepted" | "declined";
+export type FriendRequest_Status =
+  | "not-sent"
+  | "waiting-for-current-user-response"
+  | "pending"
+  | "accepted"
+  | "declined";
 
 export interface FriendRequestStatus {
   status?: FriendRequest_Status;

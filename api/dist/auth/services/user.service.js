@@ -79,10 +79,19 @@ let UserService = class UserService {
     getFriendRequestStatus(receiverId, currentUser) {
         return this.findUserById(receiverId).pipe((0, operators_1.switchMap)((receiver) => {
             return (0, rxjs_1.from)(this.friendRequestRepository.findOne({
-                where: [{ creator: currentUser, receiver }]
+                where: [
+                    { creator: currentUser, receiver: receiver },
+                    { creator: receiver, receiver: currentUser }
+                ],
+                relations: ["creator", "receiver"]
             }));
         }), (0, operators_1.switchMap)((friendRequest) => {
-            return (0, rxjs_1.of)({ status: friendRequest.status });
+            if ((friendRequest === null || friendRequest === void 0 ? void 0 : friendRequest.receiver.id) === currentUser.id) {
+                return (0, rxjs_1.of)({
+                    status: "waiting-for-current-user-response"
+                });
+            }
+            return (0, rxjs_1.of)({ status: (friendRequest === null || friendRequest === void 0 ? void 0 : friendRequest.status) || "not-sent" });
         }));
     }
     getFriendRequestUserById(friendRequestId) {
