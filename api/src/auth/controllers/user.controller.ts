@@ -132,7 +132,7 @@ export class UserController {
   @Get("friend-request/me/received-requests")
   getFriendRequestsFromRecipients(
     @Request() req
-  ): Observable<FriendRequest[]> {
+  ): Observable<FriendRequestStatus[]> {
     return this.userService.getFriendRequestsFromRecipients(req.user);
   }
 }

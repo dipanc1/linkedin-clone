@@ -1,5 +1,3 @@
-import { User } from 'src/app/auth/models/user.model';
-
 export type FriendRequestStatusType =
   | 'not-sent'
   | 'waiting-for-current-user-response'
@@ -16,4 +14,5 @@ export interface FriendRequest {
   creator: number;
   receiver: number;
   status?: FriendRequestStatusType;
+  fullImagePath?: string;
 }

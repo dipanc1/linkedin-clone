@@ -14,6 +14,8 @@ import { ModalComponent } from './components/start-post/modal/modal.component';
 import { AllPostsComponent } from './components/all-posts/all-posts.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { ConnectionProfileComponent } from './components/connection-profile/connection-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { FriendRequestPopoverComponent } from './components/header/friend-request-popover/friend-request-popover.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ConnectionProfileComponent } from './components/connection-profile/conn
     ModalComponent,
     ConnectionProfileComponent,
     AllPostsComponent,
-    TabsComponent
+    TabsComponent,
+    UserProfileComponent,
+    FriendRequestPopoverComponent
   ]
 })
 export class HomePageModule { }

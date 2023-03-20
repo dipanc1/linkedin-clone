@@ -106,7 +106,8 @@ let UserService = class UserService {
     }
     getFriendRequestsFromRecipients(currentUser) {
         return (0, rxjs_1.from)(this.friendRequestRepository.find({
-            where: [{ receiver: currentUser }]
+            where: [{ receiver: currentUser }],
+            relations: ["receiver", "creator"],
         }));
     }
 };

@@ -20,5 +20,5 @@ export declare class UserController {
     }>;
     getFriendRequestStatus(receiverStringId: string, req: any): Observable<FriendRequestStatus>;
     respondToFriendRequest(friendRequestStringId: string, statusResponse: FriendRequestStatus): Observable<FriendRequestStatus>;
-    getFriendRequestsFromRecipients(req: any): Observable<FriendRequest[]>;
+    getFriendRequestsFromRecipients(req: any): Observable<FriendRequestStatus[]>;
 }

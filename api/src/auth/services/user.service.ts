@@ -153,7 +153,8 @@ export class UserService {
   ): Observable<FriendRequest[]> {
     return from(
       this.friendRequestRepository.find({
-        where: [{ receiver: currentUser }]
+        where: [{ receiver: currentUser }],
+        relations: ["receiver", "creator"],
       })
     );
   }
