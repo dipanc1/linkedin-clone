@@ -1,6 +1,6 @@
 import { FeedPost } from "src/feed/models/post.interface";
 import { Role } from "./role.entity";
-export interface User {
+export declare class User {
     id?: number;
     firstName?: string;
     lastName?: string;

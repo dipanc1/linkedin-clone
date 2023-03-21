@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const rxjs_1 = require("rxjs");
+const user_class_1 = require("../models/user.class");
 const auth_service_1 = require("../services/auth.service");
 let AuthController = class AuthController {
     constructor(authService) {
@@ -33,14 +34,14 @@ __decorate([
     (0, common_1.Post)('register'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [user_class_1.User]),
     __metadata("design:returntype", rxjs_1.Observable)
 ], AuthController.prototype, "register", null);
 __decorate([
     (0, common_1.Post)('login'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [user_class_1.User]),
     __metadata("design:returntype", rxjs_1.Observable)
 ], AuthController.prototype, "login", null);
 AuthController = __decorate([

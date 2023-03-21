@@ -1,7 +1,7 @@
 /// <reference types="multer" />
 import { Observable } from "rxjs";
 import { UpdateResult } from "typeorm";
-import { User } from "../models/user.interface";
+import { User } from "../models/user.class";
 import { UserService } from "../services/user.service";
 import { FriendRequest, FriendRequestStatus } from "../models/friend-request.interface";
 export declare class UserController {

@@ -3,7 +3,7 @@ import { Repository, UpdateResult } from "typeorm";
 import { FriendRequestEntity } from "../models/friend-request.entity";
 import { FriendRequest, FriendRequestStatus, FriendRequest_Status } from "../models/friend-request.interface";
 import { UserEntity } from "../models/user.entity";
-import { User } from "../models/user.interface";
+import { User } from "../models/user.class";
 export declare class UserService {
     private readonly userRepository;
     private readonly friendRequestRepository;

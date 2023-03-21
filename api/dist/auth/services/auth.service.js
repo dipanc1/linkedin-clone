@@ -44,12 +44,17 @@ let AuthService = class AuthService {
         }));
     }
     validateUser(email, password) {
-        return (0, rxjs_1.from)(this.userRepository.findOne({ where: { email: email } })).pipe((0, operators_1.switchMap)((user) => (0, rxjs_1.from)(bcrypt.compare(password, user.password)).pipe((0, rxjs_1.map)((isValidPassword) => {
-            if (isValidPassword) {
-                delete user.password;
-                return user;
+        return (0, rxjs_1.from)(this.userRepository.findOne({ where: { email: email } })).pipe((0, operators_1.switchMap)((user) => {
+            if (!user) {
+                throw new common_1.HttpException({ status: common_1.HttpStatus.NOT_FOUND, error: "Invalid Credentials" }, common_1.HttpStatus.NOT_FOUND);
             }
-        }))));
+            return (0, rxjs_1.from)(bcrypt.compare(password, user.password)).pipe((0, rxjs_1.map)((isValidPassword) => {
+                if (isValidPassword) {
+                    delete user.password;
+                    return user;
+                }
+            }));
+        }));
     }
     login(user) {
         const { email, password } = user;

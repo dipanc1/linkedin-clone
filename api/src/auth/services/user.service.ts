@@ -10,7 +10,7 @@ import {
   FriendRequest_Status
 } from "../models/friend-request.interface";
 import { UserEntity } from "../models/user.entity";
-import { User } from "../models/user.interface";
+import { User } from "../models/user.class";
 
 @Injectable()
 export class UserService {

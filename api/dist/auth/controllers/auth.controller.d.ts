@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { User } from '../models/user.interface';
+import { User } from '../models/user.class';
 import { AuthService } from '../services/auth.service';
 export declare class AuthController {
     private authService;

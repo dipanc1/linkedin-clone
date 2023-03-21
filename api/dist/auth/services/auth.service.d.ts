@@ -1,8 +1,8 @@
-import { JwtService } from '@nestjs/jwt';
-import { Observable } from 'rxjs';
-import { Repository } from 'typeorm';
-import { UserEntity } from '../models/user.entity';
-import { User } from '../models/user.interface';
+import { JwtService } from "@nestjs/jwt";
+import { Observable } from "rxjs";
+import { Repository } from "typeorm";
+import { UserEntity } from "../models/user.entity";
+import { User } from "../models/user.class";
 export declare class AuthService {
     private readonly userRepository;
     private jwtService;
