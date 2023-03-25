@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { User } from 'src/auth/models/user.class';
+import { User } from '../../auth/models/user.class';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { FeedPostEntity } from '../models/post.entity';
 import { FeedPost } from '../models/post.interface';

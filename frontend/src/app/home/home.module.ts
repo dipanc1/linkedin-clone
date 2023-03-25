@@ -16,15 +16,10 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { ConnectionProfileComponent } from './components/connection-profile/connection-profile.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { FriendRequestPopoverComponent } from './components/header/friend-request-popover/friend-request-popover.component';
-
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
   declarations: [
     HomePage,
     HeaderComponent,
@@ -38,7 +33,8 @@ import { FriendRequestPopoverComponent } from './components/header/friend-reques
     AllPostsComponent,
     TabsComponent,
     UserProfileComponent,
-    FriendRequestPopoverComponent
-  ]
+    FriendRequestPopoverComponent,
+    ChatComponent,
+  ],
 })
-export class HomePageModule { }
+export class HomePageModule {}

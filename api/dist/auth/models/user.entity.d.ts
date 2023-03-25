@@ -1,4 +1,4 @@
-import { FeedPostEntity } from "src/feed/models/post.entity";
+import { FeedPostEntity } from "../../feed/models/post.entity";
 import { FriendRequestEntity } from "./friend-request.entity";
 import { Role } from "./role.entity";
 export declare class UserEntity {
