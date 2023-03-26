@@ -74,6 +74,9 @@ let UserController = class UserController {
     getFriendRequestsFromRecipients(req) {
         return this.userService.getFriendRequestsFromRecipients(req.user);
     }
+    getFriends(req) {
+        return this.userService.getFriends(req.user);
+    }
 };
 __decorate([
     (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
@@ -146,6 +149,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", rxjs_1.Observable)
 ], UserController.prototype, "getFriendRequestsFromRecipients", null);
+__decorate([
+    (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
+    (0, decorators_1.Get)("friends/my"),
+    __param(0, (0, decorators_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", rxjs_1.Observable)
+], UserController.prototype, "getFriends", null);
 UserController = __decorate([
     (0, common_1.Controller)("user"),
     __metadata("design:paramtypes", [user_service_1.UserService])

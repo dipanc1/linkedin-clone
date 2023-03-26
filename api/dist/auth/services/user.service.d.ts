@@ -19,4 +19,5 @@ export declare class UserService {
     getFriendRequestUserById(friendRequestId: number): Observable<FriendRequest>;
     respondToFriendRequest(statusResponse: FriendRequest_Status, friendRequestId: number): Observable<FriendRequestStatus>;
     getFriendRequestsFromRecipients(currentUser: User): Observable<FriendRequest[]>;
+    getFriends(currentUser: User): Observable<User[]>;
 }

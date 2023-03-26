@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/auth/models/user.model';
+import { environment } from 'src/environments/environment';
 import { ChatService } from '../../services/chat.service';
 
 @Component({
@@ -13,16 +15,23 @@ export class ChatComponent implements OnInit {
 
   newMessage$: Observable<string>;
   messages: string[] = [];
+  friends: User[] = [];
+  url: string = environment.baseApiUrl;
+
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
     // TODO: refactor - unsubscribe
-    return this.chatService.getNewMessage().subscribe((message: string) => {
+    this.chatService.getNewMessage().subscribe((message: string) => {
       this.messages.push(message);
+    });
+
+    this.chatService.getFriends().subscribe((friends: User[]) => {
+      this.friends = friends;
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     const { message } = this.form.value;
     if (!message) {
       return;

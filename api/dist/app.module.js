@@ -17,6 +17,8 @@ const auth_module_1 = require("./auth/auth.module");
 const core_1 = require("@nestjs/core");
 const all_exception_filter_1 = require("./core/all-exception.filter");
 const chat_module_1 = require("./chat/chat.module");
+const path_1 = require("path");
+const serve_static_1 = require("@nestjs/serve-static");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -32,6 +34,9 @@ AppModule = __decorate([
                 database: process.env.POSTGRES_DATABASE,
                 autoLoadEntities: true,
                 synchronize: true
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, "..", "client")
             }),
             feed_module_1.FeedModule,
             auth_module_1.AuthModule,

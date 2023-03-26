@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { from, Observable, of } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
-import { Repository, UpdateResult } from "typeorm";
+import { In, Repository, UpdateResult } from "typeorm";
 import { FriendRequestEntity } from "../models/friend-request.entity";
 import {
   FriendRequest,
@@ -154,8 +154,34 @@ export class UserService {
     return from(
       this.friendRequestRepository.find({
         where: [{ receiver: currentUser }],
-        relations: ["receiver", "creator"],
+        relations: ["receiver", "creator"]
       })
+    );
+  }
+
+  getFriends(currentUser: User): Observable<User[]> {
+    return from(
+      this.friendRequestRepository.find({
+        where: [
+          { creator: currentUser, status: "accepted" },
+          { receiver: currentUser, status: "accepted" }
+        ],
+        relations: ["creator", "receiver"]
+      })
+    ).pipe(
+      switchMap((friends: FriendRequest[]) => {
+        let userIds: number[] = [];
+
+        friends.forEach((friend: FriendRequest) => {
+          if (friend.creator.id === currentUser.id) {
+            userIds.push(friend.receiver.id);
+          } else if (friend.receiver.id === currentUser.id) {
+            userIds.push(friend.creator.id);
+          }
+        });
+
+        return from(this.userRepository.findBy({ id: In(userIds) }));
+      }),
     );
   }
 }

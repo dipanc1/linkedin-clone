@@ -107,7 +107,27 @@ let UserService = class UserService {
     getFriendRequestsFromRecipients(currentUser) {
         return (0, rxjs_1.from)(this.friendRequestRepository.find({
             where: [{ receiver: currentUser }],
-            relations: ["receiver", "creator"],
+            relations: ["receiver", "creator"]
+        }));
+    }
+    getFriends(currentUser) {
+        return (0, rxjs_1.from)(this.friendRequestRepository.find({
+            where: [
+                { creator: currentUser, status: "accepted" },
+                { receiver: currentUser, status: "accepted" }
+            ],
+            relations: ["creator", "receiver"]
+        })).pipe((0, operators_1.switchMap)((friends) => {
+            let userIds = [];
+            friends.forEach((friend) => {
+                if (friend.creator.id === currentUser.id) {
+                    userIds.push(friend.receiver.id);
+                }
+                else if (friend.receiver.id === currentUser.id) {
+                    userIds.push(friend.creator.id);
+                }
+            });
+            return (0, rxjs_1.from)(this.userRepository.findBy({ id: (0, typeorm_2.In)(userIds) }));
         }));
     }
 };

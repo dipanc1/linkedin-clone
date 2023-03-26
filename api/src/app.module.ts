@@ -7,7 +7,9 @@ import { FeedModule } from "./feed/feed.module";
 import { AuthModule } from "./auth/auth.module";
 import { APP_FILTER } from "@nestjs/core";
 import { AllExceptionsFilter } from "./core/all-exception.filter";
-import { ChatModule } from './chat/chat.module';
+import { ChatModule } from "./chat/chat.module";
+import { join } from "path";
+import { ServeStaticModule } from "@nestjs/serve-static";
 
 @Module({
   imports: [
@@ -21,6 +23,9 @@ import { ChatModule } from './chat/chat.module';
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "..", "client")
     }),
     FeedModule,
     AuthModule,
