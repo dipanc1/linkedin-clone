@@ -6,6 +6,7 @@ import { FriendRequest } from '../../models/friendRequest';
 import { ConnectionProfileService } from '../../services/connection-profile.service';
 import { FriendRequestPopoverComponent } from './friend-request-popover/friend-request-popover.component';
 import { PopoverComponent } from './popover/popover.component';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -31,6 +32,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userFullImagePath = fullImagePath;
       });
 
+    this.authService
+      .getUserImageName()
+      .pipe(
+        take(1),
+        tap(({ imageName }) => {
+          const defaultImagePath = 'blank-profile-picture.png';
+          this.authService
+            .updateUserImagePath(imageName || defaultImagePath)
+            .subscribe();
+        })
+      )
+      .subscribe();
     this.friendRequestsSubscription = this.connectionProfileService
       .getFriendRequests()
       .subscribe((friendRequests: FriendRequest[]) => {
