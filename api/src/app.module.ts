@@ -7,9 +7,9 @@ import { FeedModule } from "./feed/feed.module";
 import { AuthModule } from "./auth/auth.module";
 import { APP_FILTER } from "@nestjs/core";
 import { AllExceptionsFilter } from "./core/all-exception.filter";
-import { ChatModule } from "./chat/chat.module";
 import { join } from "path";
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { ChatModule } from "./chat/chat.module";
 
 @Module({
   imports: [
@@ -29,7 +29,7 @@ import { ServeStaticModule } from "@nestjs/serve-static";
     }),
     FeedModule,
     AuthModule,
-    ChatModule
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [
