@@ -15,7 +15,7 @@
       </div>
 
     </div>
-    <div class="friend" *ngFor="let friend of friends">
+    <div class="friend" *ngFor="let friend of friends; let i = index;" (click)="openConversation(friend, i)" class="friend" [ngClass]="{'selected-conversation': selectedConversationIndex === i}">
       <ion-grid>
         <ion-row class="ion-align-items-center ion-justify-content-center">
           <ion-col size="auto">
@@ -47,12 +47,14 @@
         <ion-text color="dark">Jatt Stack Developer</ion-text>
       </div>
 
-      <ion-button style="margin-right: -30px;" shape="round" color="dark" fill="clear">
-        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-      </ion-button>
-      <ion-button shape="round" color="dark" fill="clear">
-        <ion-icon name="videocam"></ion-icon>
-      </ion-button>
+      <div>
+        <ion-button style="margin-right: -30px;" shape="round" color="dark" fill="clear">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="dark" fill="clear">
+          <ion-icon name="videocam"></ion-icon>
+        </ion-button>
+      </div>
 
     </div>
 
@@ -97,7 +99,7 @@
               send
             </ion-button>
             <ion-button style="margin-right: -20px;" shape="round" color="dark" fill="clear">
-              <ion-icon name="ellipses-horizontal-outline"></ion-icon>
+              <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
             </ion-button>
           </span>
         </ion-row>

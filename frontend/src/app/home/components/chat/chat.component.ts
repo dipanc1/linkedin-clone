@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/auth/models/user.model';
 import { environment } from 'src/environments/environment';
 import { ChatService } from '../../services/chat.service';
@@ -11,36 +11,55 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent {
   @ViewChild('form') form: NgForm;
 
   userFullImagePath: string;
 
   newMessage$: Observable<string>;
   messages: string[] = [];
+
   friends: User[] = [];
+  friend: User;
+  friend$: BehaviorSubject<User> = new BehaviorSubject<User>({});
+
+  selectedConversationIndex = 0;
+
   url: string = environment.baseApiUrl;
   private userImagePathSubscription: Subscription;
+  private friendsSubscription: Subscription;
+  private messageSubscription: Subscription;
 
   constructor(
     private chatService: ChatService,
     private authService: AuthService
   ) {}
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.userImagePathSubscription =
       this.authService.userFullImagePath.subscribe((fullImagePath: string) => {
         this.userFullImagePath = fullImagePath;
       });
 
-    this.chatService.getNewMessage().subscribe((message: string) => {
-      this.messages.push(message);
-    });
+    this.messageSubscription = this.chatService
+      .getNewMessage()
+      .subscribe((message: string) => {
+        this.messages.push(message);
+      });
 
-    this.chatService.getFriends().subscribe((friends: User[]) => {
-      console.log(friends);
-      this.friends = friends;
-    });
+    this.friendsSubscription = this.chatService
+      .getFriends()
+      .subscribe((friends: User[]) => {
+        console.log(friends);
+        this.friends = friends;
+      });
+  }
+
+  openConversation(friend: User, index: number): void {
+    this.selectedConversationIndex = index;
+
+    this.friend = friend;
+    this.friend$.next(this.friend);
   }
 
   onSubmit() {
@@ -52,7 +71,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.form.reset();
   }
 
-  ngOnDestroy(): void {
+  ionViewDidLeave(): void {
     this.userImagePathSubscription.unsubscribe();
+    this.friendsSubscription.unsubscribe();
+    this.messageSubscription.unsubscribe();
   }
 }

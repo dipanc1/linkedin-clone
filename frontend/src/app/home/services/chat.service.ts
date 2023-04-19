@@ -3,13 +3,17 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models/user.model';
+import { ChatSocketService } from 'src/app/core/chat-socket.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
-  constructor(private socket: Socket, private http: HttpClient) {}
+  constructor(
+    private socket: ChatSocketService,
+    private http: HttpClient
+  ) {}
 
   sendMessage(message: string): void {
     this.socket.emit('sendMessage', message);

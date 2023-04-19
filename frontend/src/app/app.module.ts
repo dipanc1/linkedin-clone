@@ -8,10 +8,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
-import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
-
-const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +16,6 @@ const config: SocketIoConfig = { url: environment.socketUrl, options: {} };
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config)
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

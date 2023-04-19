@@ -1,7 +1,8 @@
 import { FeedPostEntity } from "../../feed/models/post.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { FriendRequestEntity } from "./friend-request.entity";
 import { Role } from "./role.entity";
+import { ConversationEntity } from "src/chat/models/conversation.entity";
 
 @Entity("user")
 export class UserEntity {
@@ -34,4 +35,7 @@ export class UserEntity {
   
   @OneToMany(() => FriendRequestEntity, friendRequestEntity => friendRequestEntity.receiver)
   receivedFriendRequests: FriendRequestEntity[];
+
+  @ManyToMany(() => ConversationEntity,(conversationEntity)=> conversationEntity.users)
+  conversations: ConversationEntity[];
 }
