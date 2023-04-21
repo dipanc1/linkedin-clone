@@ -1,8 +1,15 @@
 import { FeedPostEntity } from "../../feed/models/post.entity";
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from "typeorm";
 import { FriendRequestEntity } from "./friend-request.entity";
 import { Role } from "./role.entity";
 import { ConversationEntity } from "src/chat/models/conversation.entity";
+import { MessageEntity } from "src/chat/models/message.entity";
 
 @Entity("user")
 export class UserEntity {
@@ -29,13 +36,25 @@ export class UserEntity {
 
   @OneToMany(() => FeedPostEntity, feedPostEntity => feedPostEntity.author)
   feedPosts: FeedPostEntity[];
-  
-  @OneToMany(() => FriendRequestEntity, friendRequestEntity => friendRequestEntity.creator)
+
+  @OneToMany(
+    () => FriendRequestEntity,
+    friendRequestEntity => friendRequestEntity.creator
+  )
   sentFriendRequests: FriendRequestEntity[];
-  
-  @OneToMany(() => FriendRequestEntity, friendRequestEntity => friendRequestEntity.receiver)
+
+  @OneToMany(
+    () => FriendRequestEntity,
+    friendRequestEntity => friendRequestEntity.receiver
+  )
   receivedFriendRequests: FriendRequestEntity[];
 
-  @ManyToMany(() => ConversationEntity,(conversationEntity)=> conversationEntity.users)
+  @ManyToMany(
+    () => ConversationEntity,
+    conversationEntity => conversationEntity.users
+  )
   conversations: ConversationEntity[];
+
+  @OneToMany(() => MessageEntity, messageEntity => messageEntity.user)
+  messages: MessageEntity[];
 }

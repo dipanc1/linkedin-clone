@@ -15,6 +15,7 @@ const typeorm_1 = require("typeorm");
 const friend_request_entity_1 = require("./friend-request.entity");
 const role_entity_1 = require("./role.entity");
 const conversation_entity_1 = require("../../chat/models/conversation.entity");
+const message_entity_1 = require("../../chat/models/message.entity");
 let UserEntity = class UserEntity {
 };
 __decorate([
@@ -58,9 +59,13 @@ __decorate([
     __metadata("design:type", Array)
 ], UserEntity.prototype, "receivedFriendRequests", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => conversation_entity_1.ConversationEntity, (conversationEntity) => conversationEntity.users),
+    (0, typeorm_1.ManyToMany)(() => conversation_entity_1.ConversationEntity, conversationEntity => conversationEntity.users),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "conversations", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => message_entity_1.MessageEntity, messageEntity => messageEntity.user),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "messages", void 0);
 UserEntity = __decorate([
     (0, typeorm_1.Entity)("user")
 ], UserEntity);
