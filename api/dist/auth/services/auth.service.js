@@ -70,6 +70,13 @@ let AuthService = class AuthService {
             return user;
         }));
     }
+    getJwtUser(jwt) {
+        return (0, rxjs_1.from)(this.jwtService.verifyAsync(jwt)).pipe((0, rxjs_1.map)(({ user }) => {
+            return user;
+        }), (0, operators_1.catchError)(() => {
+            return (0, rxjs_1.of)(null);
+        }));
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

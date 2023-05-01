@@ -12,4 +12,5 @@ export declare class AuthService {
     validateUser(email: string, password: string): Observable<User>;
     login(user: User): Observable<string>;
     findUserById(id: number): Observable<User>;
+    getJwtUser(jwt: string): Observable<User | null>;
 }

@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
 import * as bcrypt from "bcrypt";
-import { from, map, Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { from, map, Observable, of } from "rxjs";
+import { catchError, switchMap } from "rxjs/operators";
 import { Repository } from "typeorm";
 import { UserEntity } from "../models/user.entity";
 import { User } from "../models/user.class";
@@ -80,6 +80,17 @@ export class AuthService {
       map((user: User) => {
         delete user.password;
         return user;
+      })
+    );
+  }
+
+  getJwtUser(jwt: string): Observable<User | null> {
+    return from(this.jwtService.verifyAsync(jwt)).pipe(
+      map(({ user }: { user: User }) => {
+        return user;
+      }),
+      catchError(() => {
+        return of(null);
       })
     );
   }

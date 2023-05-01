@@ -114,7 +114,6 @@ export class AllPostsComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   async presentUpdateModal(postId: number) {
-    console.log('EDIT OT');
     const modal = await this.modalController.create({
       component: ModalComponent,
       componentProps: {

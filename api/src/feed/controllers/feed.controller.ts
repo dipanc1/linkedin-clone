@@ -26,6 +26,7 @@ export class FeedController {
 
   // @Roles(Role.ADMIN, Role.PREMIUM)
   // @UseGuards(JwtGuard, RolesGuard)
+  @UseGuards(JwtGuard)
   @Post()
   create(@Body() feedPost: FeedPost, @Request() req): Observable<FeedPost> {
     return this.feedService.createPost(req.user, feedPost);
@@ -36,7 +37,7 @@ export class FeedController {
   //     return this.feedService.findAllPosts();
   // }
 
-  // @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard)
   @Get()
   findSelected(
     @Query("take") take: number = 1,
@@ -46,7 +47,7 @@ export class FeedController {
     return this.feedService.findPosts(take, skip);
   }
 
-  // @UseGuards(JwtGuard, IsCreatorGuard)
+  @UseGuards(JwtGuard, IsCreatorGuard)
   @Put(":id")
   update(
     @Param("id") id: number,
@@ -55,7 +56,7 @@ export class FeedController {
     return this.feedService.updatePost(id, feedPost);
   }
 
-  // @UseGuards(JwtGuard, IsCreatorGuard)
+  @UseGuards(JwtGuard, IsCreatorGuard)
   @Delete(":id")
   delete(@Param("id") id: number): Observable<DeleteResult> {
     return this.feedService.deletePost(id);
