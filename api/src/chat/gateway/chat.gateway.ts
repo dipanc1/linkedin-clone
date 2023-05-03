@@ -6,12 +6,12 @@ import {
   WebSocketServer
 } from "@nestjs/websockets";
 import { Server, Socket } from "socket.io";
-import { AuthService } from "src/auth/services/auth.service";
+import { AuthService } from "../../auth/services/auth.service";
 import { ConversationService } from "../services/conversation.service";
 import { Subscription, of, take, tap } from "rxjs";
-import { JwtGuard } from "src/auth/guards/jwt.guard";
+import { JwtGuard } from "../../auth/guards/jwt.guard";
 import { OnModuleInit, UseGuards } from "@nestjs/common";
-import { User } from "src/auth/models/user.class";
+import { User } from "../../auth/models/user.class";
 import { Conversation } from "../models/conversation.interface";
 import { Message } from "../models/message.interface";
 import { ActiveConversation } from "../models/active-conversation.interface ";

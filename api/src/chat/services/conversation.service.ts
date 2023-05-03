@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { ConversationEntity } from "../models/conversation.entity";
-import { DeleteResult, Repository } from "typeorm";
 import { ActiveConversationEntity } from "../models/active-conversation.entity";
+import { DeleteResult, Repository } from "typeorm";
 import { MessageEntity } from "../models/message.entity";
 import { Conversation } from "../models/conversation.interface";
 import { Observable, from, map, mergeMap, of, switchMap, take } from "rxjs";
-import { User } from "src/auth/models/user.class";
+import { User } from "../../auth/models/user.class";
 import { ActiveConversation } from "../models/active-conversation.interface ";
 import { Message } from "../models/message.interface";
 

@@ -1,4 +1,3 @@
-import { UserEntity } from "src/auth/models/user.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("active_conversation")

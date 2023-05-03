@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn
 } from "typeorm";
 import { ConversationEntity } from "./conversation.entity";
-import { UserEntity } from "src/auth/models/user.entity";
+import { UserEntity } from "../../auth/models/user.entity";
 
 @Entity("message")
 export class MessageEntity {
@@ -14,7 +14,7 @@ export class MessageEntity {
   id: number;
 
   @Column()
-  messages: string;
+  message: string;
 
   @ManyToOne(() => UserEntity, userEntity => userEntity.messages)
   user: UserEntity;

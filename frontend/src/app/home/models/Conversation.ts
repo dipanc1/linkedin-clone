@@ -1,4 +1,4 @@
-import { User } from "../../auth/models/user.class";
+import { User } from 'src/app/auth/models/user.model';
 
 export interface Conversation {
   id?: number;

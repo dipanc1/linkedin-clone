@@ -1,4 +1,4 @@
-import { UserEntity } from "src/auth/models/user.entity";
+import { UserEntity } from "../../auth/models/user.entity";
 import { Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { MessageEntity } from "./message.entity";
 
