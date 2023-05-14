@@ -29,24 +29,36 @@ let AuthService = class AuthService {
     hashPassword(password) {
         return (0, rxjs_1.from)(bcrypt.hash(password, 12));
     }
+    doesUserExist(email) {
+        return (0, rxjs_1.from)(this.userRepository.findOne({
+            where: { email: email }
+        })).pipe((0, operators_1.switchMap)((user) => {
+            return (0, rxjs_1.of)(!!user);
+        }));
+    }
     registerAccount(user) {
         const { firstName, lastName, email, password } = user;
-        return this.hashPassword(password).pipe((0, operators_1.switchMap)((hashedPassword) => {
-            return (0, rxjs_1.from)(this.userRepository.save({
-                firstName,
-                lastName,
-                email,
-                password: hashedPassword
-            })).pipe((0, rxjs_1.map)((user) => {
-                delete user.password;
-                return user;
+        return this.doesUserExist(email).pipe((0, operators_1.tap)((doesUserExist) => {
+            if (doesUserExist)
+                throw new common_1.HttpException("A user is already created with this email", common_1.HttpStatus.BAD_REQUEST);
+        }), (0, operators_1.switchMap)(() => {
+            return this.hashPassword(password).pipe((0, operators_1.switchMap)((hashedPassword) => {
+                return (0, rxjs_1.from)(this.userRepository.save({
+                    firstName,
+                    lastName,
+                    email,
+                    password: hashedPassword
+                })).pipe((0, rxjs_1.map)((user) => {
+                    delete user.password;
+                    return user;
+                }));
             }));
         }));
     }
     validateUser(email, password) {
         return (0, rxjs_1.from)(this.userRepository.findOne({ where: { email: email } })).pipe((0, operators_1.switchMap)((user) => {
             if (!user) {
-                throw new common_1.HttpException({ status: common_1.HttpStatus.NOT_FOUND, error: "Invalid Credentials" }, common_1.HttpStatus.NOT_FOUND);
+                throw new common_1.HttpException({ status: common_1.HttpStatus.FORBIDDEN, error: "Invalid Credentials" }, common_1.HttpStatus.FORBIDDEN);
             }
             return (0, rxjs_1.from)(bcrypt.compare(password, user.password)).pipe((0, rxjs_1.map)((isValidPassword) => {
                 if (isValidPassword) {

@@ -18,6 +18,7 @@ const decorators_1 = require("@nestjs/common/decorators");
 const rxjs_1 = require("rxjs");
 const roles_decorator_1 = require("../../auth/decorators/roles.decorator");
 const jwt_guard_1 = require("../../auth/guards/jwt.guard");
+const roles_guard_1 = require("../../auth/guards/roles.guard");
 const role_entity_1 = require("../../auth/models/role.entity");
 const is_creator_guard_1 = require("../guards/is-creator.guard");
 const feed_service_1 = require("../services/feed.service");
@@ -46,6 +47,7 @@ let FeedController = class FeedController {
 };
 __decorate([
     (0, roles_decorator_1.Roles)(role_entity_1.Role.ADMIN, role_entity_1.Role.PREMIUM),
+    (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard, roles_guard_1.RolesGuard),
     (0, decorators_1.UseGuards)(jwt_guard_1.JwtGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
