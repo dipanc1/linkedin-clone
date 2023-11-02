@@ -15,7 +15,9 @@
             <ion-icon name="home"></ion-icon>
             <div>Home</div>
           </ion-col>
-          <ion-col (click)="this.connectionProfileService?.friendRequests?.length > 0 && presentFriendRequestPopover($event)" class="ion-hide-md-down" size="auto">
+          <ion-col
+            (click)="this.connectionProfileService?.friendRequests?.length > 0 && presentFriendRequestPopover($event)"
+            class="ion-hide-md-down" size="auto">
             <ion-icon name="people"></ion-icon>
             <ion-badge color="danger" style="
               position: absolute;
@@ -33,7 +35,8 @@
             <ion-icon name="briefcase"></ion-icon>
             <div>Jobs</div>
           </ion-col>
-          <ion-col style="cursor: pointer;" [routerLink]="['/home/chat/connections']" class="ion-hide-md-down" size="auto">
+          <ion-col style="cursor: pointer;" [routerLink]="['/home/chat/connections']" class="ion-hide-md-down"
+            size="auto">
             <ion-icon name="chatbox-ellipses"></ion-icon>
             <div>Messageing</div>
           </ion-col>
@@ -51,7 +54,7 @@
             </ion-badge>
             <div>Notifications</div>
           </ion-col>
-          <ion-col (click)="presentPopover($event)" size="auto">
+          <ion-col class="popover-menu" (click)="presentPopover($event)" size="auto">
             <ion-avatar>
               <ion-img *ngIf="userFullImagePath" [src]="userFullImagePath"></ion-img>
             </ion-avatar>

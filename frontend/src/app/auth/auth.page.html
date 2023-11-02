@@ -49,7 +49,7 @@
   </form>
   <div class="toggle-text">
     {{ submissionType === 'login' ? 'New to '+ marlText +' LinkedIn' : 'Already on '+ marlText +' LinkedIn' }}
-    <ion-text (click)="toggleText()" color="primary">
+    <ion-text class="toggle-auth-mode" (click)="toggleText()" color="primary">
       {{ submissionType === 'login' ? 'Join now' : 'Sign in' }}
     </ion-text>
   </div>
